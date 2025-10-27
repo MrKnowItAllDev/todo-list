@@ -8,19 +8,76 @@
     <title>Document</title>
 </head>
 <body>
-    <section id="container">
-        <section style="background-color: blue;">
+<section id="container">
+    <aside id="sidebar">
+        <section class="side-header">
+            <h2>Projects</h2>
+        </section>
+        <section class="main-nav">
+            <button class="btn nav-btn">All Tasks</button>
+            <button class="btn nav-btn">Important</button>
+        </section>
+        <section class="add-project">
+            <button class="btn btn-add-project"><span>+</span>Add New Project</button>
+            <button class="btn btn-add-task"><span>+</span>Add New Task</button>
+        </section>
+        <section class="user-settings">
 
         </section>
-        <section style="background-color: red;">
-
-        </section>
-        <section style="background-color: blue;">
-
-        </section>
-        <section style="background-color: red;">
-
+    </aside>
+    <section id="content">
+        <header id="header">
+            <h1>My Tasks</h1>
+        </header>
+        <section class="main">
+            <section class="tasks">
+                <input type="search" class="searchbar" placeholder="Search" />
+                <section class="task-content">
+                    <dialog class="task-modal hidden">
+                        <button>Close modal</button>
+                        <form class="task-form">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title">
+                            <label for="description">Desc</label>
+                            <input type="text" name="description" id="description">
+                            <input type="radio" id="low" name="priority" value="low" />
+                            <label for="low">Low</label>
+                            <input type="radio" id="medium" name="priority" value="medium" />
+                            <label for="medium">Medium</label>
+                            <input type="radio" id="high" name="priority" value="high" />
+                            <label for="high">High</label>
+                            <textarea id="notes" name="notes"></textarea>
+                            <select name="progress" id="progress">
+                                <option value="To-Do">To-Do</option>
+                                <option value="Doing">Doing</option>
+                                <option value="Done">Done</option>
+                            </select>
+                            <button type="submit" class="task-button modal-btn">Add</button>
+                        </form>
+                    </dialog>
+                    <dialog class="project-modal hidden">
+                        <form class="form project-form">
+                            <input type="text" id="type" name="type" value="Important" />
+                            <button type="submit" class="modal-btn">Add Project</button>
+                        </form>
+                    </dialog>
+                </section>
+            </section>
+            <section class="task-data">
+                <section class="task-data-btns">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                </section>
+                <section class="detail-section">
+                    <h2>Task Details</h2>
+                    <p>Select a task to view details</p>
+                </section>
+            </section>
         </section>
     </section>
+</section>
 </body>
 </html>
+
+
