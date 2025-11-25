@@ -1,15 +1,14 @@
-export class Project {
-    constructor(type, pType) {
+export default class Project {
+    constructor(type) {
         this.type = type;
-        this.pType = pType;
-        this.tasks = {};
+        this.tasks = [];
     }
 
     addTask(task) {
-        this.tasks[task.title] = task;
+        this.tasks.push(task);
     }
 
     removeTask(task) {
-        delete this.tasks[task.title];
+        this.tasks.splice(this.tasks.indexOf(task), 1);
     }
 }

@@ -14,15 +14,11 @@
             <h2>Projects</h2>
         </section>
         <section class="main-nav">
-            <button class="btn nav-btn">All Tasks</button>
-            <button class="btn nav-btn">Important</button>
         </section>
         <section class="add-project">
             <button class="btn btn-add-project"><span>+</span>Add New Project</button>
-            <button class="btn btn-add-task"><span>+</span>Add New Task</button>
         </section>
         <section class="user-settings">
-
         </section>
     </aside>
     <section id="content">
@@ -34,7 +30,7 @@
                 <input type="search" class="searchbar" placeholder="Search" />
                 <section class="task-content">
                     <dialog class="task-modal hidden">
-                        <button>Close modal</button>
+                        <button class="btn-close">Close modal</button>
                         <form class="task-form">
                             <label for="title">Title</label>
                             <input type="text" name="title" id="title">
@@ -47,6 +43,7 @@
                             <input type="radio" id="high" name="priority" value="high" />
                             <label for="high">High</label>
                             <textarea id="notes" name="notes"></textarea>
+                            <input type="date" id="dueDate" name="dueDate" />
                             <select name="progress" id="progress">
                                 <option value="To-Do">To-Do</option>
                                 <option value="Doing">Doing</option>
@@ -58,7 +55,7 @@
                     <dialog class="project-modal hidden">
                         <form class="form project-form">
                             <input type="text" id="type" name="type" value="Important" />
-                            <button type="submit" class="modal-btn">Add Project</button>
+                            <button type="submit" class="modal-btn project-add">Add Project</button>
                         </form>
                     </dialog>
                 </section>
@@ -79,5 +76,3 @@
 </section>
 </body>
 </html>
-
-
