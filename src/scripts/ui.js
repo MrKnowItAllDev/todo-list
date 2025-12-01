@@ -17,13 +17,14 @@ export function projectSection(project) {
 }
 
 // Render all tasks
-// Display task in correct container (Project, Progress)
+// Display task in correct contai
+// const parent = document.querySelector(`#${task.progress.toLowerCase()}.${project.type} > .tasklist`);ner (Project, Progress)
 export function renderTasks(project, tasks) {
     for (const task of tasks) {
         const parent = document.querySelector(`#${task.progress.toLowerCase()}.${project.type} > .tasklist`);
+
         const container = document.createElement("section");
         const prioritySection = document.createElement("section");
-        const descSection
 
         const heading = document.createElement("h2");
         const desc = document.createElement("p");
@@ -36,7 +37,7 @@ export function renderTasks(project, tasks) {
 
         prioritySection.style.backgroundColor = task.priority === "high" ?
             '#EF4444' : task.priority === "medium" ?
-                '#F97316' : '#10B981';
+                '#F97316' : '#10B981'
 
         container.appendChild(heading);
         container.appendChild(prioritySection);
@@ -44,6 +45,36 @@ export function renderTasks(project, tasks) {
 
         parent.appendChild(container);
     }
+}
+
+export function renderTaskDetails(task) {
+    const parent = document.querySelector(".detail-section");
+    const container = document.createElement("section");
+    const headerSect = document.createElement("section");
+
+    const title = document.createElement("h2");
+    const description = document.createElement("p");
+    const dueDate = document.createElement("p");
+    const created = document.createElement("p");
+    const notes = document.createElement("p");
+    const progress = document.createElement("p");
+
+    parent.innerHTML  = ``;
+
+    title.textContent = task.title;
+    description.textContent = `Desc: ${task.description}`;
+    dueDate.textContent = `Due Date: ${task.dueDate}`;
+    created.textContent = `Created: ${task.created}`;
+    notes.textContent = `Notes: ${task.notes}`;
+    progress.textContent = task.progress;
+
+    headerSect.appendChild(title);
+    headerSect.appendChild(description);
+    headerSect.appendChild(created);
+    headerSect.appendChild(dueDate);
+    headerSect.appendChild(notes);
+    container.appendChild(headerSect);
+    parent.appendChild(container);
 }
 
 function progressSection(type) {

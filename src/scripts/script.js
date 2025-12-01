@@ -9,4 +9,3 @@ import {projectSection, renderTab, renderTasks } from "./ui";
 window.addEventListener('DOMContentLoaded', (e) => {
     loadDefault();
 })
-

@@ -186,13 +186,19 @@ h1 {
 }
 
 .task-header {
-    display: flex;
+    display: grid;
+    grid-template-columns: 150px 150px;
+    align-items: flex-start;
+    gap: 20px;
+    grid-template-rows: 40px;
+    flex-wrap: wrap;
 }
 
 .priority {
     border-radius: 50%;
     width: 25px;
     height: 25px;
+    padding: 14px;
 }
 
 .tasklist {

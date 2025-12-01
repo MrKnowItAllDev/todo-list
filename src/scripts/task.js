@@ -9,4 +9,11 @@ export default class Task {
         this.progress = progress;
         this.tags = {};
     }
+
+    editTask(title, description, dueDate, notes) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.notes = notes;
+    }
 }

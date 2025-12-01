@@ -22,15 +22,14 @@ export default class Storage {
         this.storage.setItem(project.type, project);
     }
 
-    static readTasks(name) {
+    static readTask(name, id) {
         const project = this.readProject(name);
-        return project.tasks;
+        return project.tasks.find(task => task.id === id);
     }
 
     static updateActiveProject(name) {
         const projectName = JSON.parse(this.storage.getItem("active"));
-        if (projectName) this.storage.setItem("active", JSON.stringify(name));
-        else this.storage.setItem("active", JSON.stringify(name));
+        this.storage.setItem("active", JSON.stringify(name));
         return projectName;
     }
 
