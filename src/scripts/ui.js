@@ -16,9 +16,6 @@ export function projectSection(project) {
     });
 }
 
-// Render all tasks
-// Display task in correct contai
-// const parent = document.querySelector(`#${task.progress.toLowerCase()}.${project.type} > .tasklist`);ner (Project, Progress)
 export function renderTasks(project, tasks) {
     for (const task of tasks) {
         const parent = document.querySelector(`#${task.progress.toLowerCase()}.${project.type} > .tasklist`);
@@ -37,7 +34,7 @@ export function renderTasks(project, tasks) {
 
         prioritySection.style.backgroundColor = task.priority === "high" ?
             '#EF4444' : task.priority === "medium" ?
-                '#F97316' : '#10B981'
+                '#F97316' : '#10B981';
 
         container.appendChild(heading);
         container.appendChild(prioritySection);
@@ -49,7 +46,6 @@ export function renderTasks(project, tasks) {
 
 export function renderTaskDetails(task) {
     const parent = document.querySelector(".detail-section");
-    const container = document.createElement("section");
     const headerSect = document.createElement("section");
 
     const title = document.createElement("h2");
@@ -61,6 +57,8 @@ export function renderTaskDetails(task) {
 
     parent.innerHTML  = ``;
 
+    headerSect.setAttribute("id", task.id);
+
     title.textContent = task.title;
     description.textContent = `Desc: ${task.description}`;
     dueDate.textContent = `Due Date: ${task.dueDate}`;
@@ -68,13 +66,16 @@ export function renderTaskDetails(task) {
     notes.textContent = `Notes: ${task.notes}`;
     progress.textContent = task.progress;
 
+    [title, description, dueDate, created, notes, progress].forEach(section => {
+        section.setAttribute("style", "font-weight: bold;");
+    })
+
     headerSect.appendChild(title);
     headerSect.appendChild(description);
     headerSect.appendChild(created);
     headerSect.appendChild(dueDate);
     headerSect.appendChild(notes);
-    container.appendChild(headerSect);
-    parent.appendChild(container);
+    parent.appendChild(headerSect);
 }
 
 function progressSection(type) {
@@ -137,10 +138,11 @@ export function renderTab(project) {
     parent.appendChild(tab);
 }
 
+// I try not to use "[element].innerHTML" a lot which would be simpler, but y'know.....
 export function clearUI() {
     const parent = document.querySelector(".task-content");
     for (const child of Array.from(parent.children)) {
-        if (child.tagName !== "DIALOG") {
+        if (child.tagName !== "DIALOG") { // Make sure not to remove dialog/modal sections
             parent.removeChild(child);
         }
     }

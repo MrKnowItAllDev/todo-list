@@ -28,9 +28,7 @@ export default class Storage {
     }
 
     static updateActiveProject(name) {
-        const projectName = JSON.parse(this.storage.getItem("active"));
-        this.storage.setItem("active", JSON.stringify(name));
-        return projectName;
+        this.storage.setItem("active", name);
     }
 
     static clear() {

@@ -1,12 +1,12 @@
 import Project from "./project";
 import Task from "./task";
+import Storage from "./storage";
 import {
     displayProjectModal, hideProjectModal,
     displayTaskModal, hideTaskModal,
     clearUI, projectSection,
     renderTab, renderTasks, renderTaskDetails
 } from "./ui";
-import Storage from "./storage";
 
 function projectFormHandler() {
     const project = new Project();
@@ -74,9 +74,10 @@ function taskFormHandler() {
 // Click on task to view it
 (function() {
     const taskUI = document.querySelector(".task-content");
-    const project = Storage.readProject(getActiveProject());
+
     taskUI.addEventListener('click', (e) => {
         e.stopPropagation();
+        const project = Storage.readProject(getActiveProject());
         const taskCard = e.target.closest(".task-header");
         if (!taskCard) return;
         const task = Storage.readTask(project.type, taskCard.id);
@@ -108,13 +109,37 @@ function taskFormHandler() {
         if (!e.target.matches(".nav-btn")) return;
 
         const project = Storage.readProject(e.target.id);
+        document.querySelector("#header > h1").textContent = project.type;
         Storage.updateActiveProject(project.type);
         renderUI(project);
     });
 })();
 
+(function() {
+    const deleteBtn = document.querySelector(".delete-task");
+
+    const parent = document.querySelector(".detail-section");
+    deleteBtn.addEventListener('click', (e) => {
+        if (parent.children) {
+            const currProject = getActiveProject();
+            const project = Storage.readProject(currProject);
+            const task = Storage.readTask(project.type, parent.children[0].id);
+            project.removeTask(task.id);
+            Storage.writeProject(project.type, project);
+            console.log(Storage.storage.getItem(project.type));
+            renderUI(project);
+        }
+    });
+})();
+
+// const getTask = (id) => {
+//     const project = getActiveProject();
+//     return Storage.readTask(project.type, id);
+//
+// }
+
 function getActiveProject() {
-    return JSON.parse(Storage.storage.getItem("active"));
+    return Storage.storage.getItem("active");
 }
 
 export function saveTaskToProject(name, task) {
@@ -129,8 +154,6 @@ export function saveTaskToProject(name, task) {
 }
 
 export function loadDefault() {
-
-    /// This assumes empty data all the time
     if (!Storage.storage.getItem("All-tasks")) {
         const project = new Project();
         project.type = "All-tasks";
@@ -138,6 +161,7 @@ export function loadDefault() {
         Storage.writeProject(project.type, project);
         Storage.updateActiveProject(project.type);
     }
+
     for (const project in { ...Storage.storage }) {
         if (project !== "active") {
             const proj = JSON.parse(Storage.storage[project]);
@@ -145,10 +169,16 @@ export function loadDefault() {
             renderUI(proj);
         }
     }
+    const active = Storage.storage.getItem("active");
+    console.log(active);
+    document.querySelector("#header > h1").textContent = active;
 }
 
 function renderUI(project) {
+    const details = document.querySelector(".detail-section");
+    if (details.children) details.innerHTML = ``;
     clearUI();
     projectSection(project);
     renderTasks(project, project.tasks);
+    Storage.updateActiveProject(project.type);
 }
