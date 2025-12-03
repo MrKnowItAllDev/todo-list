@@ -132,12 +132,6 @@ function taskFormHandler() {
     });
 })();
 
-// const getTask = (id) => {
-//     const project = getActiveProject();
-//     return Storage.readTask(project.type, id);
-//
-// }
-
 function getActiveProject() {
     return Storage.storage.getItem("active");
 }
@@ -166,12 +160,14 @@ export function loadDefault() {
         if (project !== "active") {
             const proj = JSON.parse(Storage.storage[project]);
             renderTab(proj);
-            renderUI(proj);
         }
     }
+
     const active = Storage.storage.getItem("active");
-    console.log(active);
+    const project = Storage.readProject(active);
+
     document.querySelector("#header > h1").textContent = active;
+    renderUI(project);
 }
 
 function renderUI(project) {
@@ -180,5 +176,4 @@ function renderUI(project) {
     clearUI();
     projectSection(project);
     renderTasks(project, project.tasks);
-    Storage.updateActiveProject(project.type);
 }
