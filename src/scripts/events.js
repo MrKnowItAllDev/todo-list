@@ -124,9 +124,10 @@ function taskFormHandler() {
             const currProject = getActiveProject();
             const project = Storage.readProject(currProject);
             const task = Storage.readTask(project.type, parent.children[0].id);
+            
             project.removeTask(task.id);
             Storage.writeProject(project.type, project);
-            console.log(Storage.storage.getItem(project.type));
+            
             renderUI(project);
         }
     });
