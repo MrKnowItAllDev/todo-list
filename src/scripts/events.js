@@ -158,7 +158,7 @@ export function loadDefault() {
     }
 
     for (const project in { ...Storage.storage }) {
-        if (project !== "active") {
+        if (project !== "active" && project !== "GDPR_REMOVAL_FLAG") {
             const proj = JSON.parse(Storage.storage[project]);
             renderTab(proj);
         }
